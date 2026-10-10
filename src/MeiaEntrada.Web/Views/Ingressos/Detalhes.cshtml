@@ -1,0 +1,3 @@
+@model Ingresso
+@{ViewData["Title"]="Ingresso";}
+<p class="eyebrow">INGRESSO #@Model.Id</p><h1>@Model.Tipo.Rotulo()</h1><section class="surface"><dl><dt>Evento</dt><dd>@Model.Evento.Nome</dd><dt>Preço</dt><dd class="money">@ValoresMonetarios.Brl(Model.PrecoCentavos)</dd><dt>Saldo disponível</dt><dd>@Model.QuantidadeDisponivel</dd></dl><div class="actions"><a class="btn btn-primary" href="/vendas/nova/?evento=@Model.EventoId">Registrar venda</a><a class="btn btn-outline-secondary" href="/ingressos/@Model.Id/editar/">Editar ingresso</a><a class="btn btn-outline-danger" href="/ingressos/@Model.Id/excluir/">Excluir ingresso</a><a class="btn btn-link" href="/ingressos/">Voltar</a></div></section>

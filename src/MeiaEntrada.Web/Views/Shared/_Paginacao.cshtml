@@ -1,0 +1,6 @@
+@model MeiaEntrada.Web.ViewModels.Paginacao
+<nav aria-label="Páginas" class="d-flex gap-3 align-items-center mt-4">
+@if (Model.Pagina > 1) { <a class="btn btn-outline-secondary" href="@Model.Url(Model.Pagina - 1)">Anterior</a> }
+<span>Página @Model.Pagina</span>
+@if (Model.TemProxima) { <a class="btn btn-outline-secondary" href="@Model.Url(Model.Pagina + 1)">Próxima</a> }
+</nav>

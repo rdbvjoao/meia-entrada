@@ -1,0 +1,6 @@
+@model MeiaEntrada.Web.ViewModels.Vendas.VendaCancelamentoViewModel
+@{var v=Model.Venda;ViewData["Title"]="Cancelar venda";}
+<p class="eyebrow">VENDA #@v.Id</p><h1>Cancelar esta venda?</h1><section class="surface form-surface"><h2>@v.EventoNome</h2><p>@v.Quantidade ingresso(s) — @v.IngressoTipo.Rotulo() — @ValoresMonetarios.Brl(v.ValorTotalCentavos)</p>
+@if(v.Situacao==SituacaoVenda.Cancelada){<p role="status">Venda já cancelada. Nenhuma nova restituição será feita.</p>}
+else{<p>A quantidade será devolvida ao saldo disponível. O registro continuará no histórico.</p>}
+<form method="post"><button class="btn btn-danger" name="Confirmar" value="sim">Confirmar cancelamento</button> <a class="btn btn-outline-secondary" href="/vendas/@v.Id/">Voltar</a></form></section>

@@ -1,0 +1,7 @@
+@model ListaViewModel<Ingresso>
+@{ViewData["Title"]="Ingressos";}
+<div class="d-flex flex-wrap justify-content-between gap-3"><div><p class="eyebrow">OFERTA E DISPONIBILIDADE</p><h1>Ingressos</h1><p class="subtitle">Defina os tipos, os preços e o saldo de cada evento.</p></div><div><a class="btn btn-primary" href="/ingressos/novo/?evento=@Model.Paginacao.Evento">+ Novo ingresso</a></div></div>
+<section class="surface">
+@if(Model.Itens.Count==0){<div class="empty"><h2>Nenhum ingresso por aqui</h2><p>Cadastre um tipo para começar a vender.</p><a href="/ingressos/novo/">Cadastrar ingresso</a></div>}
+else{<div class="table-responsive"><table class="table"><thead><tr><th>Evento</th><th>Tipo</th><th>Preço</th><th>Disponíveis</th><th>Ações</th></tr></thead><tbody>@foreach(var i in Model.Itens){<tr><td>@i.Evento.Nome</td><td>@i.Tipo.Rotulo()</td><td class="money">@ValoresMonetarios.Brl(i.PrecoCentavos)</td><td>@i.QuantidadeDisponivel</td><td><a href="/ingressos/@i.Id/">Consultar</a> · <a href="/ingressos/@i.Id/editar/">Editar</a></td></tr>}</tbody></table></div><partial name="_Paginacao" model="Model.Paginacao" />}
+</section>

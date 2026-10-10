@@ -1,0 +1,25 @@
+bin/
+obj/
+packages/
+var/
+.dotnet-home/
+TestResults/
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite*
+# Relatórios e chaves locais, inclusive fora das pastas padrão
+*.trx
+key-*.xml
+*.user
+*.suo
+*.log
+.env*
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+.vs/

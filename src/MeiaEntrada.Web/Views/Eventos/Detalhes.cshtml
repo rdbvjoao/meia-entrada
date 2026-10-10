@@ -1,0 +1,5 @@
+@model MeiaEntrada.Web.ViewModels.Eventos.EventoDetalheViewModel
+@{var e=Model.Evento;ViewData["Title"]=e.Nome;}
+<p class="eyebrow">EVENTO #@e.Id</p><h1>@e.Nome</h1><section class="surface">
+<dl><dt>Descrição</dt><dd class="text-break">@e.Descricao</dd><dt>Local</dt><dd>@e.Local</dd><dt>Data e horário</dt><dd>@e.Data.ToString("dd/MM/yyyy") às @e.Horario.ToString("HH:mm")</dd></dl>
+<div class="actions"><a class="btn btn-primary" href="/ingressos/?evento=@e.Id">Ver ingressos</a><a class="btn btn-outline-secondary" href="/eventos/@e.Id/editar/">Editar evento</a><a class="btn btn-outline-danger" href="/eventos/@e.Id/excluir/">Excluir evento</a><a class="btn btn-link" href="/eventos/">Voltar</a></div></section>

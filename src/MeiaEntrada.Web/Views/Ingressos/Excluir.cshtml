@@ -1,0 +1,3 @@
+@model Ingresso
+@{ViewData["Title"]="Excluir ingresso";}
+<h1>Excluir ingresso?</h1><section class="surface form-surface"><p>Ingresso #@Model.Id — <strong>@Model.Tipo.Rotulo()</strong>, @Model.Evento.Nome.</p><p>Ingressos com vendas vinculadas não podem ser excluídos.</p><form method="post"><button name="Confirmar" value="sim" class="btn btn-danger">Confirmar exclusão</button> <a class="btn btn-outline-secondary" href="/ingressos/@Model.Id/">Voltar</a></form></section>

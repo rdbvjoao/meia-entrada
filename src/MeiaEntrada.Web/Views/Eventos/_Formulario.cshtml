@@ -1,0 +1,8 @@
+@model MeiaEntrada.Web.ViewModels.Eventos.EventoFormViewModel
+<div asp-validation-summary="All" role="alert"></div>
+<div class="mb-3"><label class="form-label" asp-for="Nome">Nome do evento</label><input class="form-control" asp-for="Nome" required /><span asp-validation-for="Nome"></span></div>
+<div class="mb-3"><label class="form-label" asp-for="Descricao">Descrição</label><textarea class="form-control" asp-for="Descricao" rows="4" required></textarea><span asp-validation-for="Descricao"></span></div>
+<div class="mb-3"><label class="form-label" asp-for="Local">Local</label><input class="form-control" asp-for="Local" required /><span asp-validation-for="Local"></span></div>
+<div class="row"><div class="col-sm-6 mb-4"><label class="form-label" asp-for="Data">Data</label><input class="form-control" asp-for="Data" type="date" required /><span asp-validation-for="Data"></span></div>
+<div class="col-sm-6 mb-4"><label class="form-label" asp-for="Horario">Horário</label><input class="form-control" asp-for="Horario" type="time" required /><span asp-validation-for="Horario"></span></div></div>
+<div class="actions"><button class="btn btn-primary" type="submit">Salvar evento</button><a class="btn btn-outline-secondary" href="/eventos/">Voltar</a></div>
