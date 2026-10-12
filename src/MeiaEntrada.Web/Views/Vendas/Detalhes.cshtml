@@ -1,6 +1,6 @@
-﻿@model MeiaEntrada.Web.ViewModels.Vendas.VendaDetalheViewModel
+@model MeiaEntrada.Web.ViewModels.Vendas.VendaDetalheViewModel
 @{var v=Model.Venda;ViewData["Title"]="Venda #"+v.Id;}
-<p class="eyebrow">REGISTRO #@v.Id</p><h1>@v.EventoNome</h1><section class="surface"><span class="badge-state">@(v.Situacao==SituacaoVenda.Registrada?"Registrada":"Cancelada")</span>
+<p class="eyebrow">REGISTRO #@v.Id</p><h1>@v.EventoNome</h1><section class="surface"><span class="badge-state @(v.Situacao == SituacaoVenda.Cancelada ? "badge-cancelled" : null)">@(v.Situacao==SituacaoVenda.Registrada?"Registrada":"Cancelada")</span>
 <dl><dt>Tipo</dt><dd>@v.IngressoTipo.Rotulo()</dd><dt>Quantidade</dt><dd>@v.Quantidade</dd><dt>Preço unitário original</dt><dd>@ValoresMonetarios.Brl(v.PrecoUnitarioCentavos)</dd><dt>Total original</dt><dd class="money fs-3">@ValoresMonetarios.Brl(v.ValorTotalCentavos)</dd><dt>Registrada em (Brasília)</dt><dd>@ValoresMonetarios.Brasilia(v.RegistradaEmUtc)</dd>@if(v.CanceladaEmUtc.HasValue){<dt>Cancelada em (Brasília)</dt><dd>@ValoresMonetarios.Brasilia(v.CanceladaEmUtc.Value)</dd>}</dl>
 <div class="actions">@if(v.Situacao==SituacaoVenda.Registrada){<a href="/vendas/@v.Id/cancelar/" class="btn btn-outline-danger">Cancelar venda</a>}<a href="/vendas/" class="btn btn-outline-secondary">Ver histórico</a><a href="/vendas/nova/" class="btn btn-primary">Nova venda</a></div></section>
 

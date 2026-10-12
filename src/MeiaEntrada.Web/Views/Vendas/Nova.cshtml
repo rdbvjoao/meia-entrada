@@ -1,8 +1,8 @@
-﻿@model MeiaEntrada.Web.ViewModels.Vendas.VendaSelecaoViewModel
+@model MeiaEntrada.Web.ViewModels.Vendas.VendaSelecaoViewModel
 @{ViewData["Title"]="Registrar venda";}
 <p class="eyebrow">BILHETERIA</p><h1>Registrar venda</h1><p class="subtitle">Escolha o evento e os ingressos. Você confere o total antes de confirmar.</p>
-<section class="surface form-surface"><div asp-validation-summary="All" role="alert"></div>
-<form method="get" action="/vendas/nova/"><label class="form-label" for="evento">1. Escolha o evento</label><div class="d-flex gap-2 mb-4"><select id="evento" name="evento" class="form-select" required><option value="">Selecione</option>@foreach(var e in Model.Eventos){<option value="@e.Id" selected="@(Model.EventoId==e.Id.ToString())">@e.Nome (#@e.Id)</option>}</select><button class="btn btn-outline-secondary">Ver ingressos</button></div></form>
+<section class="surface form-surface"><div class="section-heading"><h2>Seleção de ingressos</h2><span>Selecione · Confira · Confirme</span></div><div asp-validation-summary="All" role="alert"></div>
+<form method="get" action="/vendas/nova/"><label class="form-label" for="evento">1. Escolha o evento</label><div class="d-flex gap-2 mb-4 event-picker"><select id="evento" name="evento" class="form-select" required><option value="">Selecione</option>@foreach(var e in Model.Eventos){<option value="@e.Id" selected="@(Model.EventoId==e.Id.ToString())">@e.Nome (#@e.Id)</option>}</select><button class="btn btn-outline-secondary">Ver ingressos</button></div></form>
 @if(Model.Ingressos.Count==0){<p>Nenhum ingresso disponível para a seleção. Escolha um evento com ingressos cadastrados.</p>}
 else{<form method="post" action="/vendas/conferir/">@Html.AntiForgeryToken()<input asp-for="EventoId" type="hidden" />
 <div class="mb-3"><label asp-for="IngressoId" class="form-label">2. Tipo de ingresso</label><select asp-for="IngressoId" class="form-select" required><option value="">Selecione</option>@foreach(var i in Model.Ingressos){<option value="@i.Id" disabled="@(i.QuantidadeDisponivel==0)">@i.Tipo.Rotulo() — @ValoresMonetarios.Brl(i.PrecoCentavos) — @i.QuantidadeDisponivel disponíveis</option>}</select><span asp-validation-for="IngressoId"></span></div>

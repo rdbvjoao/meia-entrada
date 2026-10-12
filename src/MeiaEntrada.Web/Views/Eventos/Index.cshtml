@@ -1,9 +1,9 @@
 @model ListaViewModel<Evento>
 @{ViewData["Title"]="Eventos";}
 <div class="d-flex flex-wrap justify-content-between align-items-end gap-3"><div><p class="eyebrow">SUA PROGRAMAÇÃO</p><h1>Eventos</h1><p class="subtitle mb-0">Organize os encontros. Prepare os ingressos. Abra as portas.</p></div><a class="btn btn-primary" href="/eventos/novo/">+ Novo evento</a></div>
-<section class="surface">
+<section class="surface"><div class="section-heading"><h2>Agenda de eventos</h2><span>Datas, locais e programação</span></div>
 @if(Model.Itens.Count==0){<div class="empty"><h2>A próxima história começa aqui</h2><p>Você ainda não cadastrou eventos.</p><a href="/eventos/novo/">Cadastrar primeiro evento</a></div>}
-else{<div class="table-responsive"><table class="table"><thead><tr><th>Evento</th><th>Quando</th><th>Local</th><th>Ações</th></tr></thead><tbody>
-@foreach(var e in Model.Itens){<tr><td><strong>@e.Nome</strong><br/><small class="text-muted">#@e.Id</small></td><td>@e.Data.ToString("dd/MM/yyyy")<br/><small>@e.Horario.ToString("HH:mm")</small></td><td>@e.Local</td><td><a href="/eventos/@e.Id/">Consultar</a> · <a href="/eventos/@e.Id/editar/">Editar</a></td></tr>}
+else{<div class="table-responsive"><table class="table responsive-table" role="table"><thead><tr><th scope="col">Evento</th><th scope="col">Quando</th><th scope="col">Local</th><th scope="col">Ações</th></tr></thead><tbody>
+@foreach(var e in Model.Itens){<tr><td data-label="Evento"><strong>@e.Nome</strong><br/><small class="text-muted">#@e.Id</small></td><td data-label="Quando">@e.Data.ToString("dd/MM/yyyy")<br/><small>@e.Horario.ToString("HH:mm")</small></td><td data-label="Local">@e.Local</td><td data-label="Ações"><a href="/eventos/@e.Id/">Consultar</a> · <a href="/eventos/@e.Id/editar/">Editar</a></td></tr>}
 </tbody></table></div><partial name="_Paginacao" model="Model.Paginacao" />}
 </section>

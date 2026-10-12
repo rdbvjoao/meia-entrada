@@ -1,6 +1,6 @@
-﻿@model MeiaEntrada.Web.ViewModels.Vendas.VendaConferenciaViewModel
+@model MeiaEntrada.Web.ViewModels.Vendas.VendaConferenciaViewModel
 @{ViewData["Title"]="Conferir venda";}
 <p class="eyebrow">BILHETERIA · CONFERÊNCIA</p><h1>Está tudo certo?</h1><p class="subtitle">Confira os dados antes de registrar. Os ingressos ainda não estão reservados.</p>
-<section class="surface form-surface"><div asp-validation-summary="All" role="alert"></div><h2>@Model.EventoNome</h2><dl><dt>Tipo</dt><dd>@Model.Tipo.Rotulo()</dd><dt>Quantidade</dt><dd>@Model.Quantidade</dd><dt>Preço unitário</dt><dd>@ValoresMonetarios.Brl(Model.PrecoUnitarioCentavos)</dd><dt>Total da venda</dt><dd class="fs-2 money">@ValoresMonetarios.Brl(Model.ValorTotalCentavos)</dd></dl>
-<form method="post" action="/vendas/">@Html.AntiForgeryToken()<input type="hidden" name="Conferencia" value="@Model.Conferencia" /><button class="btn btn-primary" name="Confirmar" value="sim">Confirmar venda</button> <a href="/vendas/nova/" class="btn btn-outline-secondary">Refazer seleção</a></form></section>
+<section class="surface form-surface"><div asp-validation-summary="All" role="alert"></div><h2>@Model.EventoNome</h2><dl class="sale-summary"><dt>Tipo</dt><dd>@Model.Tipo.Rotulo()</dd><dt>Quantidade</dt><dd>@Model.Quantidade</dd><dt>Preço unitário</dt><dd>@ValoresMonetarios.Brl(Model.PrecoUnitarioCentavos)</dd><dt>Total da venda</dt><dd class="fs-2 money">@ValoresMonetarios.Brl(Model.ValorTotalCentavos)</dd></dl>
+<form method="post" action="/vendas/" class="actions confirmation-actions">@Html.AntiForgeryToken()<input type="hidden" name="Conferencia" value="@Model.Conferencia" /><button class="btn btn-primary" name="Confirmar" value="sim">Confirmar venda</button> <a href="/vendas/nova/" class="btn btn-outline-secondary">Refazer seleção</a></form></section>
 
