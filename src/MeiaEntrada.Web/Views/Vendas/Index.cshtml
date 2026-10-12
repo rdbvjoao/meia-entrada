@@ -1,10 +1,10 @@
-﻿@model ListaViewModel<Venda>
+@model ListaViewModel<Venda>
 @{ViewData["Title"]="Histórico de vendas";}
 <div class="d-flex flex-wrap justify-content-between gap-3"><div><p class="eyebrow">MOVIMENTAÇÕES</p><h1>Histórico de vendas</h1><p class="subtitle">Cada registro preserva os dados do momento da venda.</p></div><div><a class="btn btn-primary" href="/vendas/nova/">+ Registrar venda</a></div></div>
-<section class="surface">
+<section class="surface"><div class="section-heading"><h2>Registro de vendas</h2><span>Consulte os detalhes de cada movimentação</span></div>
 @if(Model.Itens.Count==0){<div class="empty"><h2>Nenhuma venda registrada</h2><p>As vendas aparecerão aqui, das mais recentes às mais antigas.</p><a href="/vendas/nova/">Registrar primeira venda</a></div>}
-else{<div class="table-responsive"><table class="table"><thead><tr><th>Venda / evento</th><th>Tipo</th><th>Quantidade</th><th>Total</th><th>Data e horário</th><th>Situação</th><th>Ações</th></tr></thead><tbody>
-@foreach(var v in Model.Itens){<tr><td><small class="text-muted">#@v.Id</small><br/><strong>@v.EventoNome</strong></td><td>@v.IngressoTipo.Rotulo()</td><td>@v.Quantidade</td><td class="money">@ValoresMonetarios.Brl(v.ValorTotalCentavos)</td><td>@ValoresMonetarios.Brasilia(v.RegistradaEmUtc)</td><td><span class="badge-state">@(v.Situacao==SituacaoVenda.Registrada?"Registrada":"Cancelada")</span></td><td><a href="/vendas/@v.Id/">Consultar</a>@if(v.Situacao==SituacaoVenda.Registrada){<span> · </span><a href="/vendas/@v.Id/cancelar/">Cancelar</a>}</td></tr>}
+else{<div class="table-responsive"><table class="table responsive-table" role="table"><thead><tr><th scope="col">Venda / evento</th><th scope="col">Tipo</th><th scope="col">Quantidade</th><th scope="col">Total</th><th scope="col">Data e horário</th><th scope="col">Situação</th><th scope="col">Ações</th></tr></thead><tbody>
+@foreach(var v in Model.Itens){<tr><td data-label="Venda / evento"><small class="text-muted">#@v.Id</small><br/><strong>@v.EventoNome</strong></td><td data-label="Tipo">@v.IngressoTipo.Rotulo()</td><td data-label="Quantidade">@v.Quantidade</td><td data-label="Total" class="money">@ValoresMonetarios.Brl(v.ValorTotalCentavos)</td><td data-label="Data e horário">@ValoresMonetarios.Brasilia(v.RegistradaEmUtc)</td><td data-label="Situação"><span class="badge-state @(v.Situacao == SituacaoVenda.Cancelada ? "badge-cancelled" : null)">@(v.Situacao==SituacaoVenda.Registrada?"Registrada":"Cancelada")</span></td><td data-label="Ações"><a href="/vendas/@v.Id/">Consultar</a>@if(v.Situacao==SituacaoVenda.Registrada){<span> · </span><a href="/vendas/@v.Id/cancelar/">Cancelar</a>}</td></tr>}
 </tbody></table></div><partial name="_Paginacao" model="Model.Paginacao" />}
 </section>
 

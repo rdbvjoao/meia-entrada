@@ -1,12 +1,34 @@
+﻿@{
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+    var bilheteria = controller == "Vendas" && (action == "Nova" || action == "Conferir");
+}
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>@ViewData["Title"] · Meia-Entrada</title>
-<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /></head>
-<body><a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-<header class="app-header"><div class="container d-flex flex-wrap align-items-center justify-content-between gap-3">
-<a class="brand" href="/eventos/"><span class="brand-icon" aria-hidden="true">m/</span> meia-entrada.</a>
-<nav aria-label="Navegação principal" class="d-flex flex-wrap gap-1"><a href="/eventos/">Eventos</a><a href="/ingressos/">Ingressos</a><a href="/vendas/">Histórico</a><a class="nav-sale" href="/vendas/nova/">+ Registrar venda</a></nav>
-</div></header><main id="conteudo" class="container py-5" tabindex="-1"><partial name="_Mensagens" />@RenderBody()</main>
-<footer class="container py-4 text-muted small border-top">Meia-Entrada <span class="float-end">Eventos, encontros e boas histórias.</span></footer>
-<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>@await RenderSectionAsync("Scripts", required: false)
-</body></html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · Meia-Entrada</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="app-header">
+        <div class="container d-flex flex-wrap align-items-center justify-content-between gap-3">
+            <a class="brand" href="/eventos/" aria-label="Meia-Entrada — eventos"><span class="brand-icon" aria-hidden="true">m/</span> meia-entrada.</a>
+            <nav aria-label="Navegação principal" class="app-nav">
+                <a href="/eventos/" class="@(controller == "Eventos" ? "active" : null)" aria-current="@(controller == "Eventos" ? "page" : null)">Eventos</a>
+                <a href="/ingressos/" class="@(controller == "Ingressos" ? "active" : null)" aria-current="@(controller == "Ingressos" ? "page" : null)">Ingressos</a>
+                <a href="/vendas/" class="@(controller == "Vendas" && !bilheteria ? "active" : null)" aria-current="@(controller == "Vendas" && !bilheteria ? "page" : null)">Histórico</a>
+                <a href="/vendas/nova/" class="nav-sale @(bilheteria ? "active" : null)" aria-current="@(bilheteria ? "page" : null)">+ Registrar venda</a>
+            </nav>
+        </div>
+    </header>
+    <div class="workspace-label"><div class="container"><span>GESTÃO DE EVENTOS E INGRESSOS</span><span>Meia-Entrada / @ViewData["Title"]</span></div></div>
+    <main id="conteudo" class="container py-5" tabindex="-1"><partial name="_Mensagens" />@RenderBody()</main>
+    <footer class="container app-footer"><span>Meia-Entrada</span><span>Eventos, encontros e boas histórias.</span></footer>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
